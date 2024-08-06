@@ -49,7 +49,50 @@ def reduce_resources(beverage):
     return resources
 
 
-# def
+def process_coins(beverage):
+    quarters = input("How many quarters?: ")
+    try:
+        quarters = int(quarters)
+        quarters *= 0.25
+    except ValueError:
+        print("Please provide a valid number")
+
+    dimes = input("How many dimes?: ")
+    try:
+        dimes = int(dimes)
+        dimes *= 0.10
+    except ValueError:
+        print("Please provide a valid number")
+
+    nickles = input("How many nickles?: ")
+    try:
+        nickles = int(nickles)
+        nickles *= 0.05
+    except ValueError:
+        print("Please provide a valid number")
+
+    pennies = input("How many pennies?: ")
+    try:
+        pennies = int(pennies)
+        pennies *= 0.01
+    except ValueError:
+        print("Please provide a valid number")
+
+    total = round((quarters + dimes + nickles + pennies), 2)
+    print(total)
+    cost = round((MENU[beverage]['cost']), 2)
+    print(cost)
+    if total == cost:
+        resources['money'] = cost
+        print("ENOUGH MONEY PROVIDED")
+        return True
+    elif total > cost:
+        resources['money'] = cost
+        print(F"You inserted ${total} and price is {cost}. Here is your change: ${total - cost}")
+        return True
+    else:
+        print(F"{beverage} price is ${cost} and you inserted ${total}. Not enough, money has been refunded...")
+        return False
 
 
 while True:
@@ -73,12 +116,14 @@ while True:
                 print(F"{key.title()}: {display_resources[key]}ml")
             if key == 'coffee':
                 print(F"{key.title()}: {display_resources[key]}g")
+            if key == 'money':
+                print(F"{key.title()}: ${display_resources[key]}")
     # Display availability of beverage
     elif user_choice == "espresso":
         if is_available("espresso"):
             reduce_resources("espresso")
-
-            print("Here is your espresso. Enjoy!")
+            if process_coins("espresso"):
+                print("Here is your espresso. Enjoy!")
 
     elif user_choice == "latte":
         if is_available("latte"):
