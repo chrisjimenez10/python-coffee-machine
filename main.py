@@ -83,12 +83,12 @@ def process_coins(beverage):
     cost = round((MENU[beverage]['cost']), 2)
     print(cost)
     if total == cost:
-        resources['money'] = cost
+        resources['money'] += cost
         print("ENOUGH MONEY PROVIDED")
         return True
     elif total > cost:
-        resources['money'] = cost
-        print(F"You inserted ${total} and price is {cost}. Here is your change: ${total - cost}")
+        resources['money'] += cost
+        print(F"You inserted ${total} and price is ${cost}. Returning change: ${round((total - cost), 2)}")
         return True
     else:
         print(F"{beverage} price is ${cost} and you inserted ${total}. Not enough, money has been refunded...")
@@ -128,14 +128,11 @@ while True:
     elif user_choice == "latte":
         if is_available("latte"):
             reduce_resources("latte")
-
-            print("Here is your latte. Enjoy!")
+            if process_coins("latte"):
+                print("Here is your latte. Enjoy!")
 
     elif user_choice == "cappuccino":
         if is_available("cappuccino"):
             reduce_resources("cappuccino")
-
-            print("Here is your cappuccino. Enjoy!")
-
-
-
+            if process_coins("cappuccino"):
+                print("Here is your cappuccino. Enjoy!")
