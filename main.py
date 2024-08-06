@@ -29,10 +29,17 @@ def is_available(beverage):
         if key == "coffee":
             coffee += MENU[beverage]['ingredients']['coffee']
 
-    if resources['water'] > water and resources['milk'] > milk and resources['coffee'] > coffee:
+    if resources['water'] >= water and resources['milk'] >= milk and resources['coffee'] >= coffee:
         return True
     else:
+        if resources['water'] < water:
+            print("Sorry, there is not enough water.")
+        if resources['milk'] < milk:
+            print("Sorry, there is not enough milk.")
+        if resources['coffee'] < coffee:
+            print("Sorry, there is not enough coffee.")
         return False
+
 
 
 def reduce_resources(beverage):
@@ -41,35 +48,49 @@ def reduce_resources(beverage):
     resources['coffee'] -= MENU[beverage]['ingredients']['coffee']
     return resources
 
-# User Prompt
-user_choice = input("What would you like? (espresso/latte/cappuccino):\n").lower()
 
-# Turn OFF Coffee Machine
-if user_choice == "off":
-    print("TURNING OFF...")
-# Display Report on Resources
-elif user_choice == "report":
-    display_resources = resource_amount(resources)
-    for key in display_resources:
-        if key == 'water' or key == 'milk':
-            print(F"{key.title()}: {display_resources[key]}ml")
-        if key == 'coffee':
-            print(F"{key.title()}: {display_resources[key]}g")
-# Display availability of beverage
-elif user_choice == "espresso":
-    if is_available("espresso"):
-        print(reduce_resources("espresso"))
-    else:
-        print("NOT ENOUGH RESOURCES")
-elif user_choice == "latte":
-    if is_available("latte"):
-        print(reduce_resources("latte"))
-    else:
-        print("NOT ENOUGH RESOURCES")
-elif user_choice == "cappuccino":
-    if is_available("cappuccino"):
-        print(reduce_resources("cappuccino"))
-    else:
-        print("NOT ENOUGH RESOURCES")
+# def
+
+
+while True:
+# User Prompt
+    while True:
+        user_choice = input("What would you like? (espresso/latte/cappuccino):\n").lower()
+        if user_choice != "off" and user_choice != "report" and user_choice != "espresso" and user_choice != "latte" and user_choice != "cappuccino":
+            print("Please provide a valid input.")
+        else:
+            break
+
+    # Turn OFF Coffee Machine
+    if user_choice == "off":
+        print("TURNING OFF...")
+        break
+    # Display Report on Resources
+    elif user_choice == "report":
+        display_resources = resource_amount(resources)
+        for key in display_resources:
+            if key == 'water' or key == 'milk':
+                print(F"{key.title()}: {display_resources[key]}ml")
+            if key == 'coffee':
+                print(F"{key.title()}: {display_resources[key]}g")
+    # Display availability of beverage
+    elif user_choice == "espresso":
+        if is_available("espresso"):
+            reduce_resources("espresso")
+
+            print("Here is your espresso. Enjoy!")
+
+    elif user_choice == "latte":
+        if is_available("latte"):
+            reduce_resources("latte")
+
+            print("Here is your latte. Enjoy!")
+
+    elif user_choice == "cappuccino":
+        if is_available("cappuccino"):
+            reduce_resources("cappuccino")
+
+            print("Here is your cappuccino. Enjoy!")
+
 
 
