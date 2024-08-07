@@ -26,21 +26,21 @@ while True:
             if key == 'money':
                 print(F"{key.title()}: ${display_resources[key]}")
 
-    # Display availability of beverage
+    # Display availability of beverage and Successful/Unsuccessful Purchase of Beverage
     elif user_choice == "espresso":
         if is_available("espresso"):
-            reduce_resources("espresso")
             if process_coins("espresso"):
+                reduce_resources("espresso")
                 print("Here is your espresso. Enjoy!")
 
     elif user_choice == "latte":
         if is_available("latte"):
-            reduce_resources("latte")
             if process_coins("latte"):
+                reduce_resources("latte")
                 print("Here is your latte. Enjoy!")
 
     elif user_choice == "cappuccino":
         if is_available("cappuccino"):
-            reduce_resources("cappuccino")
             if process_coins("cappuccino"):
+                reduce_resources("cappuccino")
                 print("Here is your cappuccino. Enjoy!")
