@@ -50,33 +50,42 @@ def reduce_resources(beverage):
 
 
 def process_coins(beverage):
-    quarters = input("How many quarters?: ")
-    try:
-        quarters = int(quarters)
-        quarters *= 0.25
-    except ValueError:
-        print("Please provide a valid number")
 
-    dimes = input("How many dimes?: ")
-    try:
-        dimes = int(dimes)
-        dimes *= 0.10
-    except ValueError:
-        print("Please provide a valid number")
+    while True:
+        quarters = input("How many quarters?: ")
+        try:
+            quarters = int(quarters)
+            quarters *= 0.25
+            break
+        except ValueError:
+            print("Please provide a valid number")
 
-    nickles = input("How many nickles?: ")
-    try:
-        nickles = int(nickles)
-        nickles *= 0.05
-    except ValueError:
-        print("Please provide a valid number")
+    while True:
+        dimes = input("How many dimes?: ")
+        try:
+            dimes = int(dimes)
+            dimes *= 0.10
+            break
+        except ValueError:
+            print("Please provide a valid number")
 
-    pennies = input("How many pennies?: ")
-    try:
-        pennies = int(pennies)
-        pennies *= 0.01
-    except ValueError:
-        print("Please provide a valid number")
+    while True:
+        nickles = input("How many nickles?: ")
+        try:
+            nickles = int(nickles)
+            nickles *= 0.05
+            break
+        except ValueError:
+            print("Please provide a valid number")
+
+    while True:
+        pennies = input("How many pennies?: ")
+        try:
+            pennies = int(pennies)
+            pennies *= 0.01
+            break
+        except ValueError:
+            print("Please provide a valid number")
 
     total = round((quarters + dimes + nickles + pennies), 2)
     print(total)
